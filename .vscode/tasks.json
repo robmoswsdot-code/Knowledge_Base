@@ -1,0 +1,55 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "db: init archive inventory",
+      "type": "shell",
+      "command": "python",
+      "args": [
+        ".vscode/init_archive_inventory.py"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "db: validate archive inventory",
+      "type": "shell",
+      "command": "python",
+      "args": [
+        ".vscode/validate_archive_inventory.py"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "db: seed archive inventory test",
+      "type": "shell",
+      "command": "python",
+      "args": [
+        ".vscode/seed_archive_inventory.py"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    }
+  ]
+}

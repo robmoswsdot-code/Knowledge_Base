@@ -1,0 +1,7 @@
+__pycache__/
+*.py[cod]
+
+.vscode/archive_inventory.db
+.vscode/archive_inventory.legacy.*.db.bak
+
+docs/reports/agent_reports/seed_discovery_report.md

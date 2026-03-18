@@ -1,0 +1,25 @@
+{
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "files.eol": "\n",
+  "editor.rulers": [
+    100
+  ],
+  "editor.wordWrap": "bounded",
+  "editor.wordWrapColumn": 100,
+  "editor.formatOnSave": false,
+  "python.analysis.extraPaths": [
+    "${workspaceFolder}/.vscode"
+  ],
+  "files.associations": {
+    "*.sql": "sql"
+  },
+  "[markdown]": {
+    "editor.wordWrap": "on",
+    "editor.quickSuggestions": {
+      "comments": "off",
+      "other": "off",
+      "strings": "off"
+    }
+  }
+}

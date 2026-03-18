@@ -1,0 +1,33 @@
+import sqlite3
+
+def initialize_formal_archive_database():
+    connection = sqlite3.connect('.vscode/archive_inventory.db')
+    cursor = connection.cursor()
+
+    # Table 1: Residual Risks (Full Terminology)
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS residual_risks (
+            id INTEGER PRIMARY KEY,
+            state_route_number TEXT NOT NULL,
+            risk_trigger_description TEXT,
+            design_analysis_reference TEXT,
+            remediation_pathway_plan TEXT,
+            estimated_restart_timeline TEXT,
+            projectwise_universal_resource_name TEXT
+        )
+    ''')
+
+    # Table 2: Right of Way and Lease Status
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS right_of_way_leases (
+            id INTEGER PRIMARY KEY,
+            state_route_number TEXT NOT NULL,
+            parcel_identification_number TEXT,
+            lease_agreement_type TEXT, 
+            lease_expiration_date DATE,
+            reacquisition_risk_assessment TEXT 
+        )
+    ''')
+
+    connection.commit()
+    connection.close()
