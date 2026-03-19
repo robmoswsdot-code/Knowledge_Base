@@ -50,3 +50,14 @@ Each journal entry must include:
 - **Action:** Generated first agent report: AGT_SR92_Et_Al_Repository_Status_2026-03-18.md
 - **Source:** archive_inventory.db validation (55/55 pass), reconciliation (19 unregistered files), seed test (36/36 pass), full file tree, all control layer files
 - **Outcome:** Report saved to docs/reports/agent/ and registered in archive_inventory.db as id=2. SHA-256 hash: 5dc10fe8b171a907041df83a921b069f3d2c7e4f5b4ff190a00a34b637d92080
+
+### 2026-03-19 08:15 AM
+
+- **Task Order:** Register initial Civil Engineering source set in the knowledge index
+- **Objective:** Classify the first authoritative manual and two training debrief references using the Civil Engineering metadata model
+- **Inputs:** docs/manuals/Standard_Specifications.pdf; docs/debriefs/RES_Utility Project Coordination Process Matrix.09.2025.pdf; docs/debriefs/Utilities in WSDOT Projects - Grub Club 3-2026.pdf; Indexing_Schema.md; Agent_SOP.md
+- **Expected Outputs:** Source records in archive_inventory.db with authority, discipline, topic, and decision-type tags
+- **Governing Standard:** Agent_SOP.md Sections 5, 6, and 7; Indexing_Schema.md; Source_of_Truth_Map.md
+- **Action:** Registered initial manual and debrief documents in the Civil Engineering knowledge index
+- **Source:** WSDOT Standard Specifications manual; utility coordination debrief materials from training meeting
+- **Outcome:** Three source records added to archive_inventory.db and tagged for future retrieval by discipline and topic
