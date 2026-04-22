@@ -4,6 +4,8 @@ __pycache__/
 .vscode/archive_inventory.db
 .vscode/archive_inventory.legacy.*.db.bak
 
+ralph-wiggum/
+
 docs/reports/agent_reports/seed_discovery_report.md
 docs/**
 !docs/
