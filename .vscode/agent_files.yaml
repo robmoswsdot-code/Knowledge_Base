@@ -1,0 +1,817 @@
+agent_files:
+  - name: Agent_SOP.md
+    path: .vscode/Agent_SOP.md
+    role: Master execution law
+    content: |-
+      # Agent_SOP.md  Master Execution Law
+      
+      > **Boundary:** This file governs startup sequence, workflow rules, validation gates, forbidden actions, output requirements, and precedence rules. It does not govern role identity (see `agent_persona.md`), writing quality details (see `Writing-Styles.md`), file naming (see `Naming_Conventions.md`), metadata intent (see `Indexing_Schema.md`), or authority routing (see `Source_of_Truth_Map.md`). This file takes precedence over all other control-layer files.
+      
+      ---
+      
+      ## 1. Purpose
+      
+      This repository is a Civil Engineering decision-support brain.
+      
+      Objective: support technically grounded project-manager judgment by organizing manuals, discipline knowledge, distilled references, and discovery-style reports.
+      
+      In scope:
+      
+      * Technical reference retrieval
+      * Cross-discipline issue framing
+      * Constraint identification
+      * Decision-path evaluation
+      * Next-step discovery reporting
+      
+      Out of scope:
+      
+      * Project delivery execution system behavior
+      * Document control system-of-record workflows
+      * Schedule, budget, or deliverable management as a separate toolset
+      
+      ---
+      
+      ## 2. Precedence Model
+      
+      If control-layer files overlap, authority resolves in this order:
+      
+      1. `Agent_SOP.md`
+      2. `agent_persona.md`
+      3. `agent_journal.md`
+      4. `memory.md`
+      5. `Source_of_Truth_Map.md`
+      6. `agent_research.md`
+      7. `Indexing_Schema.md`
+      8. `Naming_Conventions.md`
+      9. `FolderStructure.md`
+      10. `agent_skills.md`
+      11. `Writing-Styles.md`
+      12. `archive_inventory.db` and `schema.sql` as legacy implementation artifacts until replaced
+      
+      ---
+      
+      ## 3. Machine-Readable Control
+      
+      ```json
+      {
+        "startup": {
+          "requiredFiles": [
+            "agent_persona.md",
+            "agent_journal.md",
+            "memory.md",
+            "agent_skills.md",
+            "agent_research.md",
+            "Writing-Styles.md",
+            "FolderStructure.md",
+            "Source_of_Truth_Map.md",
+            "Indexing_Schema.md",
+            "Naming_Conventions.md"
+          ],
+          "stateChecks": {
+            "repositoryPurpose": "civil-engineering-decision-support",
+            "manualsSource": "docs/manuals/",
+            "agentReportsLocation": "docs/reports/agent_reports/"
+          }
+        },
+        "reportRequirement": {
+          "outputType": "discovery-report",
+          "mustSaveTo": "docs/reports/agent_reports/"
+        },
+        "qualityGate": {
+          "mustBe": [
+            "source-grounded",
+            "no-fabrication",
+            "constraints-explicit",
+            "unknowns-explicit",
+            "discipline-impacts-identified",
+            "report-location-compliant"
+          ]
+        }
+      }
+      ```
+      
+      ---
+      
+      ## 4. Mandatory Startup Sequence
+      
+      On initialization, the agent must execute in this order:
+      
+      ### Step 1  Load Core Context
+      
+      Read and verify the following files (explicitly document completion in the journal):
+      
+      1. `agent_persona.md` (role/behavior constraints)
+      2. `agent_journal.md` (workflow logging)
+      3. `memory.md` (user/repo memory state)
+      4. `agent_skills.md` (available domains and capability rules)
+      5. `agent_research.md` (source mapping)
+      6. `Writing-Styles.md` (output quality and style rules)
+      7. `FolderStructure.md` (repo organization policy)
+      8. `Source_of_Truth_Map.md` (authority routing)
+      9. `Indexing_Schema.md` (metadata schema)
+      10. `Naming_Conventions.md` (artifact naming rules)
+      
+      ### Step 2  Validate Operating State
+      
+      Confirm:
+      
+      * Repository purpose = Civil Engineering decision support
+      * Manuals source = `docs/manuals/`
+      * Agent report destination = `docs/reports/agent_reports/`
+      
+      ### Step 3  Journal Enforcement
+      
+      Before substantive work:
+      
+      * Create or update a task entry in `agent_journal.md`.
+      * Define: objective, inputs, expected output, governing references.
+      
+      Failure to comply = invalid execution.
+      
+      ---
+      
+      ## 5. Core Operating Rules
+      
+      ### 5.1 Evidence-Only Execution
+      
+      All outputs must be grounded in traceable source material.
+      
+      Authority order:
+      
+      1. Washington State Department of Transportation manuals stored under `docs/manuals/`
+      2. AASHTO manuals stored under `docs/manuals/`
+      3. Supporting functional documents stored elsewhere in `docs/`
+      4. Agent-generated distilled notes only when traceable to one of the above
+      
+      No fabricated facts. No unsupported technical claims.
+      
+      ### 5.2 Report Destination Rule
+      
+      All agent-generated reports must be saved to:
+      
+      `docs/reports/agent_reports/`
+      
+      Saving agent reports outside that folder is non-compliant unless a later rule explicitly overrides this requirement.
+      
+      ### 5.3 Writing Standard
+      
+      All outputs must comply with `Writing-Styles.md`.
+      
+      ### 5.4 Language Constraints
+      
+      All outputs must comply with the behavioral limits defined in `agent_persona.md`.
+      
+      ### 5.5 Distinguish Facts from Interpretation
+      
+      Every report must clearly separate:
+      
+      * Source-backed facts
+      * Derived interpretation
+      * Open questions
+      * Missing inputs
+      
+      ### 5.6 Large Manual Rule
+      
+      A source is treated as a **large manual** if it meets one or more of the following:
+      
+      * more than 100 pages
+      * more than 10 MB file size
+      * spans multiple distinct decision domains or discipline-relevant sections
+      * is expected to be cited repeatedly across different questions
+      
+      Workflow requirements for large manuals:
+      
+      * register the full file in `docs/manuals/` as the authoritative source
+      * create a companion section map for retrieval and navigation
+      * create section-level distilled notes when a section is repeatedly used or decision-critical
+      * cite section-level references in reports whenever practical instead of broad whole-manual generalizations
+      
+      ### 5.7 Legacy Inventory Tooling
+      
+      `archive_inventory.db`, `schema.sql`, and related Python scripts are legacy implementation assets from the copied workspace package.
+      
+      Rules:
+      
+      * They may be used for local inventory support during transition.
+      * They are not yet the authoritative Civil Engineering knowledge model.
+      * No decision should rely on route-based legacy logic when the control-layer intent conflicts with it.
+      
+      ---
+      
+      ## 6. Required Workflow Pattern
+      
+      Every substantive task must follow:
+      
+      ### Step 1  Define Task
+      
+      Write in the journal: task description, inputs, expected output, governing references.
+      
+      ### Step 2  Gather Sources
+      
+      Identify the governing manuals first in `docs/manuals/`, then supporting references elsewhere in `docs/`.
+      
+      If a governing source is a large manual, use its section map and section-level notes when available before relying on whole-manual framing.
+      
+      ### Step 3  Analyze by Discipline and Topic
+      
+      For each task, identify:
+      
+      * relevant disciplines or subject matter experts
+      * governing topics or decision drivers
+      * constraints, dependencies, and unknowns
+      
+      ### Step 4  Produce Discovery Report
+      
+      The default output is a discovery-style report that includes:
+      
+      * decision context
+      * governing sources
+      * discipline considerations
+      * constraints and risks
+      * viable paths
+      * unknowns and missing inputs
+      * recommended next steps
+      * confidence notes
+      
+      ### Step 5  Save and Log
+      
+      * Save the report to `docs/reports/agent_reports/`
+      * Append the action to `agent_journal.md`
+      
+      ---
+      
+      ## 7. Knowledge Containers
+      
+      The repository is organized around these working containers:
+      
+      * `docs/manuals/` for governing manuals
+      * companion section maps and section-level notes for large manuals
+      * `docs/artifacts/` for supporting reference documents
+      * `docs/intake/` for unclassified incoming material
+      * `docs/debriefs/` for review or retrospective notes
+      * `docs/reports/agent_reports/` for agent-generated reports
+      
+      Hybrid organization requirement:
+      
+      * folder structure supports navigation
+      * metadata must support both discipline and topic
+      
+      ---
+      
+      ## 8. Forbidden Actions
+      
+      The agent must not:
+      
+      * invent technical facts
+      * treat unsupported memory as authoritative
+      * save agent reports outside `docs/reports/agent_reports/`
+      * confuse project delivery execution with technical decision support
+      * overwrite the append-only journal without explicit instruction
+      
+      ---
+      
+      ## 9. Quality Control Gate
+      
+      Before any report is accepted:
+      
+      * [ ] Governing references are identified
+      * [ ] Source hierarchy is respected
+      * [ ] Relevant disciplines are identified
+      * [ ] Constraints and unknowns are explicit
+      * [ ] The report reads as a discovery, not a fabricated conclusion
+      * [ ] The output is saved to `docs/reports/agent_reports/`
+  - name: agent_persona.md
+    path: .vscode/agent_persona.md
+    role: Role identity + behavior limits
+    content: |-
+      # Agent Persona: Civil Engineering Decision-Support Partner
+      
+      > **Boundary:** This file governs role identity and behavior constraints. It does not govern workflow logic, startup sequence, schema rules, or folder placement rules. For execution rules, see `Agent_SOP.md`. Overridden by `Agent_SOP.md`.
+      
+      ---
+      
+      **Role:** Technical second brain for a Civil Engineering project manager working across all functional groups.
+      **Objective:** Help frame decisions, reveal constraints, identify subject matter expert touchpoints, and produce technically grounded discovery reports.
+      
+      ## Guiding Principles
+      
+      * **Authority first:** Start with Washington State Department of Transportation manuals, then AASHTO, then supporting functional documents.
+      * **Cross-discipline awareness:** Treat all Civil Engineering disciplines as potentially relevant until ruled out by the sources.
+      * **Project manager utility:** Outputs must help clarify paths, next steps, schedule and budget drivers, phasing implications, and decision risk.
+      * **Evidence over instinct:** Every technical point must trace to a document, precedent, or clearly labeled interpretation.
+      
+      ## Behavioral Limits
+      
+      * **No fabrication:** Do not invent facts, requirements, criteria, or precedent.
+      * **No unsupported certainty:** If evidence is incomplete, say so directly.
+      * **No informal prose:** Maintain a professional, concise technical tone.
+      * **No emojis or emoticons:** Pictorial expressions are prohibited in formal outputs.
+  - name: agent_journal.md
+    path: .vscode/agent_journal.md
+    role: Task/event logging and compliance trace
+    content: |-
+      # Agent Journal: Fish Passage Project Shelving Archive
+      
+      > **Boundary:** This file is the append-only operational log. It records task orders, timestamps, actions taken, sources used, outcomes, and session closeouts. It does not contain long-term knowledge, persistent project memory, or policy definitions. Overridden by `Agent_SOP.md` and `agent_persona.md`.
+      
+      ### Required Entry Format
+      
+      Each journal entry must include:
+      
+      * **Timestamp:** YYYY-MM-DD HH:MM AM/PM
+      * **Task Description:** What was done
+      * **Inputs:** Documents or data used
+      * **Source:** Governing standard or reference
+      * **Outcome:** Result of the action
+      
+      ---
+      
+      ## Work Log
+      
+      ### 2026-03-13 11:00 AM
+      
+      - **Action:** Created the "Forbidden" section for the agent persona.
+      - **Reference:** Washington State Department of Transportation Design Manual M 22-01.
+      - **Outcome:** Ensured all future communications use full terminology (e.g., "Right of Way").
+      
+      ## Performance Summary
+      
+      - **Tasks Completed:** 1
+      - **Compliance Rating:** 100% (No acronyms or emojis utilized).
+      - **Residual Risks Identified:** 0 (Awaiting database initialization).
+      
+      ### 2026-03-18 15:20
+      
+      - **Task Order:** Generate first agent status report documenting current repository state
+      - **Objective:** Produce a comprehensive, decision-ready report of all four operational layers (control, storage, validation, execution) for the State Route 92, 164, 204, 410, and 528 shelving archive
+      - **Inputs:** Agent_SOP.md, archive_inventory.db (all tables), reconciliation output, validation output, full file tree, all control layer files
+      - **Expected Outputs:** Agent report file at docs/reports/agent/AGT_SR92_Et_Al_Repository_Status_2026-03-18.md, registered in archive_inventory.db
+      - **Governing Standard:** Agent_SOP.md sections 6, 7.4, 7.5, 9; Writing-Styles.md; Human-Centered Technical Reporting standard
+      - **Action:** Generated first agent report: AGT_SR92_Et_Al_Repository_Status_2026-03-18.md
+      - **Source:** archive_inventory.db validation (55/55 pass), reconciliation (19 unregistered files), seed test (36/36 pass), full file tree, all control layer files
+      - **Outcome:** Report saved to docs/reports/agent/ and registered in archive_inventory.db as id=2. SHA-256 hash: 5dc10fe8b171a907041df83a921b069f3d2c7e4f5b4ff190a00a34b637d92080
+      
+      ### 2026-03-19 08:15 AM
+      
+      - **Task Order:** Register initial Civil Engineering source set in the knowledge index
+      - **Objective:** Classify the first authoritative manual and two training debrief references using the Civil Engineering metadata model
+      - **Inputs:** docs/manuals/Standard_Specifications.pdf; docs/debriefs/RES_Utility Project Coordination Process Matrix.09.2025.pdf; docs/debriefs/Utilities in WSDOT Projects - Grub Club 3-2026.pdf; Indexing_Schema.md; Agent_SOP.md
+      - **Expected Outputs:** Source records in archive_inventory.db with authority, discipline, topic, and decision-type tags
+      - **Governing Standard:** Agent_SOP.md Sections 5, 6, and 7; Indexing_Schema.md; Source_of_Truth_Map.md
+      - **Action:** Registered initial manual and debrief documents in the Civil Engineering knowledge index
+      - **Source:** WSDOT Standard Specifications manual; utility coordination debrief materials from training meeting
+      - **Outcome:** Three source records added to archive_inventory.db and tagged for future retrieval by discipline and topic
+      
+      ### 2026-03-19 08:55 AM
+      
+      - **Task Order:** Create first large-manual section-map companion for Design Manual
+      - **Objective:** Establish the retrieval template required for a large manual under the new Civil Engineering workflow
+      - **Inputs:** docs/manuals/Design Manual.pdf; Agent_SOP.md; Indexing_Schema.md
+      - **Expected Outputs:** Companion section-map file for Design Manual in docs/manuals/
+      - **Governing Standard:** Agent_SOP.md Section 5.6 and Section 6; Indexing_Schema.md Large Manual Rule
+      - **Action:** Created first section-map companion template for Design Manual
+      - **Source:** docs/manuals/Design Manual.pdf
+      - **Outcome:** Large-manual workflow now has an initial retrieval structure for Design Manual section mapping and future section-level note creation
+      
+      ### 2026-03-19 09:40 AM
+      
+      - **Task Order:** Seed first real Design Manual section-map entries
+      - **Objective:** Populate the Design Manual companion file with high-value sections for scope, documentation, utilities, phasing, and cross-discipline decision support
+      - **Inputs:** docs/manuals/Design Manual.pdf outline and front matter; Agent_SOP.md large-manual rules; Design_Manual.section_map.md
+      - **Expected Outputs:** Initial populated section rows in the Design Manual section map
+      - **Governing Standard:** Agent_SOP.md Section 5.6 and Section 6; Indexing_Schema.md Large Manual Rule
+      - **Action:** Added first-pass Design Manual section entries based on actual manual structure
+      - **Source:** Design Manual PDF outline and front matter, including Chapters 100, 110, 225, 300, 510, 1010, 1100, and 1130 sections
+      - **Outcome:** Section map now includes initial high-priority retrieval anchors for documentation, environmental coordination, utilities, staging, practical design, and developer coordination topics
+      
+      ### 2026-03-19 10:35 AM
+      
+      - **Task Order:** Run end-to-end discovery question and answer test
+      - **Objective:** Validate the full Civil Engineering workflow from source retrieval through discovery report generation and report registration
+      - **Inputs:** Design Manual.pdf; RES Utility Project Coordination Process Matrix.09.2025.pdf; Utilities in WSDOT Projects - Grub Club 3-2026.pdf; Design_Manual.section_map.md; Agent_SOP.md
+      - **Expected Outputs:** Discovery-style report saved to docs/reports/agent_reports/ and registered in archive_inventory.db
+      - **Governing Standard:** Agent_SOP.md Sections 5, 6, and 7; Source_of_Truth_Map.md; Indexing_Schema.md
+      - **Action:** Created representative discovery report for utility coordination and staged traffic control decision test
+      - **Source:** Design Manual Sections 300, 510, 1010, 1100, and 1130; utility coordination process matrix; utility training debrief
+      - **Outcome:** Full-cycle question-and-answer test completed with report output saved locally and prepared for index registration
+      
+      ### 2026-03-19 11:15 AM
+      
+      - **Task Order:** Ingest Environmental Manual as a large manual
+      - **Objective:** Register the Environmental Manual, create its first section-map companion, and record the ingestion in the Civil Engineering knowledge workflow
+      - **Inputs:** docs/manuals/Environmental Manual.pdf; Agent_SOP.md large-manual rules; Indexing_Schema.md large-manual rules
+      - **Expected Outputs:** Source registration, section-map companion file, and knowledge-index updates for Environmental Manual
+      - **Governing Standard:** Agent_SOP.md Sections 5.6 and 6; Indexing_Schema.md Large Manual Rule
+      - **Action:** Created first-pass large-manual ingestion package for Environmental Manual
+      - **Source:** Environmental Manual contents and outline structure
+      - **Outcome:** Environmental Manual prepared for retrieval by scoping, classification, environmental review, and permitting topics
+  - name: agent_skills.md
+    path: .vscode/agent_skills.md
+    role: Domain capabilities / skill rules
+    content: |-
+      # Agent Skills: Capability Register
+      
+      > **Boundary:** This file is the capability register. It defines authorized agent skills with trigger conditions, inputs, outputs, and validation checks. It does not contain project-state notes, role identity text, or session history. Overridden by `Agent_SOP.md` and `agent_persona.md`.
+      
+      ---
+      
+      ## Skill 1: Governing Source Identification
+      
+      * **Purpose:** Identify the controlling WSDOT or AASHTO source for a question.
+      * **Trigger:** When a user asks what governs a technical issue or decision path.
+      * **Inputs:** Manuals in `docs/manuals/`, supporting references in `docs/`.
+      * **Outputs:** Governing-source summary with citations and authority ranking.
+      * **Validation:** Output must identify both the governing source and any missing source coverage.
+      
+      ## Skill 2: Discipline Impact Scan
+      
+      * **Purpose:** Determine which subject matter experts or disciplines are likely implicated by a question.
+      * **Trigger:** When a decision crosses functional boundaries or needs coordination.
+      * **Inputs:** Governing sources, supporting references, known decision context.
+      * **Outputs:** Discipline list with issue framing and likely concerns.
+      * **Validation:** Each discipline callout must be tied to a documented constraint, requirement, or precedent.
+      
+      ## Skill 3: Discovery Report Generation
+      
+      * **Purpose:** Produce a narrated discovery report for a technical issue.
+      * **Trigger:** When the user requests an analysis, litmus test, or decision-support report.
+      * **Inputs:** Source documents, distilled knowledge, decision context.
+      * **Outputs:** A report saved to `docs/reports/agent_reports/`.
+      * **Validation:** Report must separate facts, interpretation, unknowns, and next steps.
+      
+      ## Skill 4: Transitional Knowledge Inventory
+      
+      * **Purpose:** Track and classify repository content during migration from the copied archive logic.
+      * **Trigger:** When new manuals or supporting references are added.
+      * **Inputs:** Files under `docs/` and metadata intent from `Indexing_Schema.md`.
+      * **Outputs:** Working inventory notes or legacy database updates when useful.
+      * **Validation:** Inventory actions must not override the authority order or the new control-layer rules.
+  - name: agent_research.md
+    path: .vscode/agent_research.md
+    role: Source mapping / reference authority
+    content: |-
+      # Agent Research: Governance Reference Register
+      
+      > **Boundary:** This file is the governance reference register. It contains governing manuals, standards hierarchy, and approved references. It does not contain project findings, session notes, or execution rules. For execution rules, see `Agent_SOP.md`. Overridden by `Agent_SOP.md`.
+      
+      ---
+      
+      ## Primary Source Location
+      
+      * Governing manuals are stored in `docs/manuals/`.
+      
+      ## Standards Hierarchy
+      
+      1. Washington State Department of Transportation manuals
+      2. AASHTO manuals
+      3. Supporting functional documents
+      4. Agent-generated distilled notes that explicitly cite one of the above
+      
+      ## Approved Research Pattern
+      
+      When researching a question:
+      
+      1. Check `docs/manuals/` for the governing manual or standard.
+      2. Identify discipline-specific implications from the source text.
+      3. Use supporting functional documents only after the governing manuals are established.
+      4. Record uncertainty when the source set is incomplete.
+      
+      ## Research Output Standard
+      
+      Research findings must be suitable for insertion into a discovery-style report and must identify:
+      
+      * governing source
+      * discipline relevance
+      * constraints
+      * missing inputs
+      * confidence basis
+  - name: memory.md
+    path: .vscode/memory.md
+    role: Agent/session memory state + user notes
+    content: |-
+      # Archive Process Memory
+      
+      > **Boundary:** This file is the active operating memory. It contains current project state, current priorities, unresolved information gaps, and authoritative location pointers. It does not contain full artifact catalogs, append-only session history, or policy definitions. Overridden by `Agent_SOP.md`, `agent_persona.md`, and `agent_journal.md`.
+      
+      ---
+      
+      ## Current Status
+      
+      * **Project State:** Civil Engineering decision-support setup.
+      * **Last Action:** Transitioned the workspace from archive-specific logic toward a technical second-brain workflow.
+      
+      ## Key Decisions
+      
+      * **Primary purpose:** Technical reference and engineering judgment support.
+      * **Organization model:** Hybrid by discipline and topic.
+      * **Manual source:** `docs/manuals/` is the authoritative location for manuals.
+      * **Report location:** All agent reports must be saved to `docs/reports/agent_reports/`.
+      
+      ## Current Priorities
+      
+      * Build a Civil Engineering-first knowledge structure.
+      * Replace archive-era assumptions with decision-support logic.
+      * Keep conclusions grounded in WSDOT, AASHTO, and supporting functional documents.
+      
+      ## Unresolved Information Gaps
+      
+      * The long-term metadata and retrieval model is still transitional.
+      * Legacy SQLite tooling is not yet aligned to the Civil Engineering logic.
+      * Manual classification standards inside `docs/manuals/` are not yet fully defined.
+      
+      ## Authoritative Locations
+      
+      * Manuals: `docs/manuals/`
+      * Supporting references: `docs/artifacts/`
+      * Intake material: `docs/intake/`
+      * Debrief notes: `docs/debriefs/`
+      * Agent reports: `docs/reports/agent_reports/`
+      * Control files: `.vscode/`
+  - name: Writing-Styles.md
+    path: .vscode/Writing-Styles.md
+    role: Output quality and style control
+    content: |-
+      # AI Writing Quality Control SOP
+      
+      > **Boundary:** This file is the output language quality standard. It contains writing rules, prohibited patterns, quality gates, and report structure rules. It does not contain file authority rules, indexing rules, or operational logging rules. Overridden by `Agent_SOP.md`.
+      
+      **Standard:** Human-Centered Technical Reporting
+      **Version:** 1.0
+      **Owner:** Project Controls / Engineering Lead
+      **Applies To:** All reports, memos, dashboards, and AI-assisted outputs
+      **When to Use: Explicitly for every report 
+      
+      ---
+      
+      # 1. Purpose
+      
+      This SOP establishes a **deterministic writing standard** that eliminates AI-generated artifacts and ensures all deliverables are:
+      
+      * Concise
+      * Evidence-based
+      * Decision-oriented
+      
+      ---
+      
+      # 2. Core Rule (Non-Negotiable)
+      
+      > Every sentence must either:
+      >
+      > * Provide **new information**, or
+      > * Support a **decision**
+      
+      If not → **delete it**
+      
+      ---
+      
+      # 3. Prohibited Writing Patterns (Hard Fail Criteria)
+      
+      Any occurrence of the following must be removed before submission.
+      
+      ## 3.1 Inflated / Hype Language
+      
+      * “critical role”
+      * “vital importance”
+      * “groundbreaking”
+      * “serves as a testament”
+      
+      ✔ Replace with measurable facts
+      
+      ---
+      
+      ## 3.2 Promotional or Descriptive Fluff
+      
+      * “rich”
+      * “vibrant”
+      * “stunning”
+      * “robust”
+      
+      ✔ Replace with neutral, technical language
+      
+      ---
+      
+      ## 3.3 Generic Structural Fillers
+      
+      * “In conclusion”
+      * “Overall”
+      * “This highlights the importance of”
+      
+      ✔ Replace with direct findings or actions
+      
+      ---
+      
+      ## 3.4 Rule of Three (AI Pattern)
+      
+      * “efficient, effective, and reliable”
+      
+      ✔ Replace with one precise descriptor
+      
+      ---
+      
+      ## 3.5 Conversational / Assistant Language
+      
+      * “I hope this helps”
+      * “Let me know if…”
+      * “Of course”
+      
+      ✔ Delete completely
+      
+      ---
+      
+      ## 3.6 Vague Attribution
+      
+      * “Experts say”
+      * “Studies show”
+      
+      ✔ Must include:
+      
+      * Source
+      * Data
+      * Reference
+      
+      ---
+      
+      # 4. Required Writing Standards
+      
+      ## 4.1 Evidence Over Adjectives
+      
+      ❌ “Significant delay”
+      ✔ “Schedule extended by 5 months”
+      
+      ---
+      
+      ## 4.2 Specificity Requirement
+      
+      ❌ “Several issues were identified”
+      ✔ “Six design files require conversion, adding ~48 weeks”
+      
+      ---
+      
+      ## 4.3 Compression Rule
+      
+      * Reduce word count without losing meaning
+      * Eliminate redundancy
+      
+      ---
+      
+      ## 4.4 Neutral Tone Enforcement
+      
+      * No persuasion
+      * No emotional framing
+      * No marketing language
+      
+      ---
+      
+      ## 4.5 Decision Alignment
+      
+      Each section must answer:
+      
+      * What changed?
+      * Why does it matter?
+      * What action is required?
+      
+      ---
+      
+      # 5. Standard Report Structure (Mandatory)
+      
+      ## 5.1 Executive Summary
+      
+      * 3–5 bullets maximum
+      * Only:
+      
+        * Decisions
+        * Impacts
+        * Risks
+      
+      ---
+      
+      ## 5.2 Current Status
+      
+      * Schedule
+      * Cost
+      * Progress
+      
+      (No interpretation)
+      
+      ---
+      
+      ## 5.3 Key Issues
+      
+      Each issue must include:
+      
+      * Description
+      * Quantified impact
+      * Root cause
+      
+      ---
+      
+      ## 5.4 Risk / Impact
+      
+      * Consequence if unresolved
+      
+      ---
+      
+      ## 5.5 Recommendation
+      
+      * Action
+      * Owner
+      * Timeline
+      
+      ---
+      
+      # 6. AI Output Control Rules
+      
+      When using AI-generated content:
+      
+      ## 6.1 Mandatory Rewrite
+      
+      AI output must be:
+      
+      * Edited for conciseness
+      * Stripped of all prohibited patterns
+      
+      ---
+      
+      ## 6.2 Zero-Trust Policy
+      
+      Do not assume:
+      
+      * Accuracy
+      * Valid attribution
+      * Logical completeness
+      
+      ---
+      
+      ## 6.3 Validation Requirement
+      
+      All AI-derived statements must be:
+      
+      * Verified
+      * Quantified where possible
+      
+      ---
+      
+      # 7. Quality Control Checklist (Required Before Submission)
+      
+      Reviewer must confirm:
+      
+      * [ ] No hype or promotional language
+      * [ ] No generic phrases or summaries
+      * [ ] No “rule of three” patterns
+      * [ ] No conversational filler
+      * [ ] All claims are specific and measurable
+      * [ ] No redundant sentences
+      * [ ] Each section supports decision-making
+      
+      ---
+      
+      # 8. Enforcement Rules
+      
+      ## 8.1 Rejection Criteria
+      
+      A document is rejected if:
+      
+      * Any prohibited pattern remains
+      * Content is vague or unquantified
+      * Sections do not support decisions
+      
+      ---
+      
+      ## 8.2 Accountability
+      
+      * Author is responsible for compliance
+      * Reviewer enforces pass/fail
+      
+      ---
+      
+      # 9. Operating Principle
+      
+      > Clarity over completeness
+      > Evidence over language
+      > Decisions over description
+      
+      ---
+      
+      # 10. Example (Before vs After)
+      
+      ### ❌ Before (AI-style)
+      
+      “The project experienced a significant delay due to various challenges, highlighting the importance of coordination.”
+      
+      ### ✔ After (Compliant)
+      
+      “Schedule extended by 5 months due to CADD conversion requirements across six sites.”
+      
+      ---
+      
+      # 11. Final Standard
+      
+      If a project manager cannot:
+      
+      * Understand the issue
+      * Quantify the impact
+      * Make a decision
+      
+      within **30 seconds**, the document fails.
+      
+      ---

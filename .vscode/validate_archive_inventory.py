@@ -32,6 +32,8 @@ EXPECTED_AUTHORITY_LEVELS = ["WSDOT", "AASHTO", "supporting", "derived"]
 EXPECTED_SOURCE_KINDS = ["manual", "reference", "artifact", "note", "report"]
 EXPECTED_RECORD_TYPES = [
     "manual",
+    "manual_section_map",
+    "manual_section_note",
     "reference_note",
     "precedent",
     "decision_driver",

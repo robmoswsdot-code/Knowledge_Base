@@ -1,0 +1,15 @@
+{
+  "schema_version": 2,
+  "description": "Append-only log of agent question-and-answer outcomes. Each entry records the keyword, sources cited, answer given, result (found/not_found), and verdict (correct/incorrect/unverified). The agent must consult entries with verdict=correct before re-querying to reinforce known answers.",
+  "fields": {
+    "id": "Sequential integer. Auto-assigned.",
+    "timestamp": "UTC ISO-8601 string.",
+    "keyword": "Search term used.",
+    "sources_matched": "List of source_id and path from archive_inventory.db.",
+    "knowledge_items_matched": "List of item_id and title from archive_inventory.db.",
+    "answer_given": "The answer text the agent produced. Empty string if no answer was possible.",
+    "result": "found | not_found",
+    "verdict": "correct | incorrect | unverified. Set by user or reviewer. Agent uses correct entries to reinforce knowledge."
+  },
+  "qa_history": []
+}

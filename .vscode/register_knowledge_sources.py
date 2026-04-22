@@ -10,6 +10,30 @@ DB_PATH = os.path.join(SCRIPT_DIR, "archive_inventory.db")
 
 SOURCE_REGISTRATIONS = [
     {
+        "title": "WSDOT Environmental Manual",
+        "authority_level": "WSDOT",
+        "source_kind": "manual",
+        "path": "docs/manuals/Environmental Manual.pdf",
+        "status": "active",
+        "notes": "Large manual for environmental planning, scoping, review, permitting, and decision documentation.",
+        "tags": {
+            "discipline": ["environmental"],
+            "topic": ["environmental_review", "nepa_sepa", "project_scoping"],
+            "decision_type": ["permitting", "scoping"]
+        }
+    },    {
+        "title": "WSDOT Design Manual",
+        "authority_level": "WSDOT",
+        "source_kind": "manual",
+        "path": "docs/manuals/Design Manual.pdf",
+        "status": "active",
+        "notes": "Large manual for design policy, documentation, utilities, staging, and practical design guidance.",
+        "tags": {
+            "discipline": ["civil_general"],
+            "topic": ["design_policy", "design_documentation", "practical_design"],
+            "decision_type": ["design_review"]
+        }
+    },    {
         "title": "WSDOT Standard Specifications",
         "authority_level": "WSDOT",
         "source_kind": "manual",
@@ -20,6 +44,19 @@ SOURCE_REGISTRATIONS = [
             "discipline": ["civil_general"],
             "topic": ["standards", "specifications"],
             "decision_type": ["design_review"]
+        }
+    },
+    {
+        "title": "WSDOT Hydraulics Manual",
+        "authority_level": "WSDOT",
+        "source_kind": "manual",
+        "path": "docs/manuals/Hydraulics_Manual.pdf",
+        "status": "active",
+        "notes": "Hydraulics design and drainage manual for water resources and stormwater management.",
+        "tags": {
+            "discipline": ["hydraulics", "water_resources"],
+            "topic": ["drainage", "stormwater", "hydraulic_design"],
+            "decision_type": ["design_review", "permit_approval"]
         }
     },
     {

@@ -41,7 +41,9 @@ If control-layer files overlap, authority resolves in this order:
 9. `FolderStructure.md`
 10. `agent_skills.md`
 11. `Writing-Styles.md`
-12. `archive_inventory.db` and `schema.sql` as legacy implementation artifacts until replaced
+12. `Question_Answering_SOP.md`
+13. `qa_history.json` as append-only answer audit trail
+14. `archive_inventory.db` and `schema.sql` as legacy implementation artifacts until replaced
 
 ---
 
@@ -60,7 +62,8 @@ If control-layer files overlap, authority resolves in this order:
       "FolderStructure.md",
       "Source_of_Truth_Map.md",
       "Indexing_Schema.md",
-      "Naming_Conventions.md"
+      "Naming_Conventions.md",
+      "agent_files.yaml"
     ],
     "stateChecks": {
       "repositoryPurpose": "civil-engineering-decision-support",
@@ -72,6 +75,12 @@ If control-layer files overlap, authority resolves in this order:
     "outputType": "discovery-report",
     "mustSaveTo": "docs/reports/agent_reports/"
   },
+  "questionAnsweringRule": {
+    "allowedSources": ["docs/", ".vscode/"],
+    "externalSourcesAllowed": false,
+    "mustCiteSourcePaths": true,
+    "ifNotFound": "state-unavailable-in-repository"
+  },
   "qualityGate": {
     "mustBe": [
       "source-grounded",
@@ -79,7 +88,9 @@ If control-layer files overlap, authority resolves in this order:
       "constraints-explicit",
       "unknowns-explicit",
       "discipline-impacts-identified",
-      "report-location-compliant"
+      "report-location-compliant",
+      "source-paths-cited",
+      "no-external-sources"
     ]
   }
 }
@@ -93,18 +104,19 @@ On initialization, the agent must execute in this order:
 
 ### Step 1  Load Core Context
 
-Read the following files:
+Read and verify the following files (explicitly document completion in the journal):
 
-1. `agent_persona.md`
-2. `agent_journal.md`
-3. `memory.md`
-4. `agent_skills.md`
-5. `agent_research.md`
-6. `Writing-Styles.md`
-7. `FolderStructure.md`
-8. `Source_of_Truth_Map.md`
-9. `Indexing_Schema.md`
-10. `Naming_Conventions.md`
+- [ ] `agent_persona.md` (role/behavior constraints)
+- [ ] `agent_journal.md` (workflow logging)
+- [ ] `memory.md` (user/repo memory state)
+- [ ] `agent_skills.md` (available domains and capability rules)
+- [ ] `agent_research.md` (source mapping)
+- [ ] `Writing-Styles.md` (output quality and style rules)
+- [ ] `FolderStructure.md` (repo organization policy)
+- [ ] `Source_of_Truth_Map.md` (authority routing)
+- [ ] `Indexing_Schema.md` (metadata schema)
+- [ ] `Naming_Conventions.md` (artifact naming rules)
+- [ ] `agent_files.yaml` (machine-readable agent file manifest)
 
 ### Step 2  Validate Operating State
 
@@ -165,7 +177,23 @@ Every report must clearly separate:
 * Open questions
 * Missing inputs
 
-### 5.6 Legacy Inventory Tooling
+### 5.6 Large Manual Rule
+
+A source is treated as a **large manual** if it meets one or more of the following:
+
+* more than 100 pages
+* more than 10 MB file size
+* spans multiple distinct decision domains or discipline-relevant sections
+* is expected to be cited repeatedly across different questions
+
+Workflow requirements for large manuals:
+
+* register the full file in `docs/manuals/` as the authoritative source
+* create a companion section map for retrieval and navigation
+* create section-level distilled notes when a section is repeatedly used or decision-critical
+* cite section-level references in reports whenever practical instead of broad whole-manual generalizations
+
+### 5.7 Legacy Inventory Tooling
 
 `archive_inventory.db`, `schema.sql`, and related Python scripts are legacy implementation assets from the copied workspace package.
 
@@ -174,6 +202,27 @@ Rules:
 * They may be used for local inventory support during transition.
 * They are not yet the authoritative Civil Engineering knowledge model.
 * No decision should rely on route-based legacy logic when the control-layer intent conflicts with it.
+
+### 5.8 Question Answering Rule
+
+When the agent is asked a question, it must follow the full procedure defined in `Question_Answering_SOP.md`.
+
+Summary:
+
+* Run `query_knowledge_index.py <keyword>` against `archive_inventory.db` first.
+* Search `docs/` and `.vscode/` control files for keyword matches.
+* Answer only from sources found in those locations; cite exact paths.
+* If no match is found, state explicitly that the information is unavailable and identify what document type is needed.
+* Do not use external sources, internet knowledge, or unsourced memory.
+* Every query result (found or not found) is automatically logged to `qa_history.json`.
+
+### 5.9 Acronym Index Maintenance Rule
+
+To keep acronym interpretation consistent across agents and reports:
+
+* To rebuild after adding new docs: `python .vscode/build_acronym_index.py`
+* To add a new known acronym: extend `SEED_EXPANSIONS` in the script.
+* Treat `.vscode/Acronym_Index.md` as the working acronym reference for report writing and review.
 
 ---
 
@@ -188,6 +237,8 @@ Write in the journal: task description, inputs, expected output, governing refer
 ### Step 2  Gather Sources
 
 Identify the governing manuals first in `docs/manuals/`, then supporting references elsewhere in `docs/`.
+
+If a governing source is a large manual, use its section map and section-level notes when available before relying on whole-manual framing.
 
 ### Step 3  Analyze by Discipline and Topic
 
@@ -214,6 +265,7 @@ The default output is a discovery-style report that includes:
 
 * Save the report to `docs/reports/agent_reports/`
 * Append the action to `agent_journal.md`
+* If new source documents were added or acronym usage changed, rebuild the acronym index using: `python .vscode/build_acronym_index.py`
 
 ---
 
@@ -222,6 +274,7 @@ The default output is a discovery-style report that includes:
 The repository is organized around these working containers:
 
 * `docs/manuals/` for governing manuals
+* companion section maps and section-level notes for large manuals
 * `docs/artifacts/` for supporting reference documents
 * `docs/intake/` for unclassified incoming material
 * `docs/debriefs/` for review or retrospective notes
@@ -243,6 +296,8 @@ The agent must not:
 * save agent reports outside `docs/reports/agent_reports/`
 * confuse project delivery execution with technical decision support
 * overwrite the append-only journal without explicit instruction
+* answer questions using external sources outside `docs/` and `.vscode/`
+* omit source path citations from any answer or report claim
 
 ---
 
@@ -256,3 +311,7 @@ Before any report is accepted:
 * [ ] Constraints and unknowns are explicit
 * [ ] The report reads as a discovery, not a fabricated conclusion
 * [ ] The output is saved to `docs/reports/agent_reports/`
+* [ ] All claims cite exact source paths from `docs/` or `.vscode/`
+* [ ] No external or unsourced content used in answering
+* [ ] Acronym index is rebuilt after new document ingestion when needed
+* [ ] New known acronyms are added to `SEED_EXPANSIONS` before final submission

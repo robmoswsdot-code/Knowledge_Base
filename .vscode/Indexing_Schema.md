@@ -13,6 +13,8 @@ The current SQLite implementation in `.vscode/archive_inventory.db` is legacy an
 ## Core Record Types
 
 * `manual`
+* `manual_section_map`
+* `manual_section_note`
 * `reference_note`
 * `precedent`
 * `decision_driver`
@@ -25,6 +27,7 @@ The current SQLite implementation in `.vscode/archive_inventory.db` is legacy an
 |---|---|---|---|
 | title | text | yes | Human-readable record title |
 | record_type | text | yes | One of the approved core record types |
+| parent_source_id | integer | conditional | Required for section maps and section-level notes derived from a manual |
 | authority_level | text | yes | One of: WSDOT, AASHTO, supporting, derived |
 | discipline_tags | list | yes | One or more relevant Civil Engineering disciplines |
 | topic_tags | list | yes | One or more issue, topic, or decision-driver tags |
@@ -43,6 +46,22 @@ The current SQLite implementation in `.vscode/archive_inventory.db` is legacy an
 | supporting | Supporting functional document, reference, or precedent |
 | derived | Agent-generated note or report tied to source records |
 
+## Large Manual Rule
+
+A source is classified as a **large manual** if it meets one or more of the following:
+
+* more than 100 pages
+* more than 10 MB file size
+* spans multiple distinct decision domains or discipline-relevant sections
+* is likely to be cited repeatedly across different questions
+
+Large-manual handling requirements:
+
+* the full manual remains the authoritative source file under `docs/manuals/`
+* a `manual_section_map` record should be created to represent the manual retrieval structure
+* `manual_section_note` records should be created for high-value or repeatedly cited sections
+* derived section notes must remain traceable to the parent manual
+
 ## Relationship Types
 
 * `governs`: source controls a topic or decision
@@ -54,6 +73,7 @@ The current SQLite implementation in `.vscode/archive_inventory.db` is legacy an
 ## Validation Intent
 
 * Every derived record must link back to at least one non-derived source.
+* Every `manual_section_map` or `manual_section_note` must link back to its parent manual.
 * Every discovery report must cite its governing sources.
 * Every record must carry both discipline and topic context.
 * Agent reports must resolve to `docs/reports/agent_reports/`.

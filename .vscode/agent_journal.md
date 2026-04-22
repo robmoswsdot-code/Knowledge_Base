@@ -14,18 +14,6 @@ Each journal entry must include:
 
 ---
 
-## Current Strategy and Planning
-
-**Current Plan:** Initialize the archival assistant and establish the foundational database for State Route 92, 164, 204, 410, and 528.
-**Status:** In Progress
-
-## Task Order and To-Do List
-
-- [X] Define Forbidden Actions and Formal Tone Standards.
-- [ ] Initialize the SQLite Database (`archive_inventory.db`).
-- [ ] Map ProjectWise folder structure to the Database schema.
-- [ ] Audit all Temporary Construction Easements for expiration dates.
-
 ## Work Log
 
 ### 2026-03-13 11:00 AM
@@ -61,3 +49,57 @@ Each journal entry must include:
 - **Action:** Registered initial manual and debrief documents in the Civil Engineering knowledge index
 - **Source:** WSDOT Standard Specifications manual; utility coordination debrief materials from training meeting
 - **Outcome:** Three source records added to archive_inventory.db and tagged for future retrieval by discipline and topic
+
+### 2026-03-19 08:55 AM
+
+- **Task Order:** Create first large-manual section-map companion for Design Manual
+- **Objective:** Establish the retrieval template required for a large manual under the new Civil Engineering workflow
+- **Inputs:** docs/manuals/Design Manual.pdf; Agent_SOP.md; Indexing_Schema.md
+- **Expected Outputs:** Companion section-map file for Design Manual in docs/manuals/
+- **Governing Standard:** Agent_SOP.md Section 5.6 and Section 6; Indexing_Schema.md Large Manual Rule
+- **Action:** Created first section-map companion template for Design Manual
+- **Source:** docs/manuals/Design Manual.pdf
+- **Outcome:** Large-manual workflow now has an initial retrieval structure for Design Manual section mapping and future section-level note creation
+
+### 2026-03-19 09:40 AM
+
+- **Task Order:** Seed first real Design Manual section-map entries
+- **Objective:** Populate the Design Manual companion file with high-value sections for scope, documentation, utilities, phasing, and cross-discipline decision support
+- **Inputs:** docs/manuals/Design Manual.pdf outline and front matter; Agent_SOP.md large-manual rules; Design_Manual.section_map.md
+- **Expected Outputs:** Initial populated section rows in the Design Manual section map
+- **Governing Standard:** Agent_SOP.md Section 5.6 and Section 6; Indexing_Schema.md Large Manual Rule
+- **Action:** Added first-pass Design Manual section entries based on actual manual structure
+- **Source:** Design Manual PDF outline and front matter, including Chapters 100, 110, 225, 300, 510, 1010, 1100, and 1130 sections
+- **Outcome:** Section map now includes initial high-priority retrieval anchors for documentation, environmental coordination, utilities, staging, practical design, and developer coordination topics
+
+### 2026-03-19 10:35 AM
+
+- **Task Order:** Run end-to-end discovery question and answer test
+- **Objective:** Validate the full Civil Engineering workflow from source retrieval through discovery report generation and report registration
+- **Inputs:** Design Manual.pdf; RES Utility Project Coordination Process Matrix.09.2025.pdf; Utilities in WSDOT Projects - Grub Club 3-2026.pdf; Design_Manual.section_map.md; Agent_SOP.md
+- **Expected Outputs:** Discovery-style report saved to docs/reports/agent_reports/ and registered in archive_inventory.db
+- **Governing Standard:** Agent_SOP.md Sections 5, 6, and 7; Source_of_Truth_Map.md; Indexing_Schema.md
+- **Action:** Created representative discovery report for utility coordination and staged traffic control decision test
+- **Source:** Design Manual Sections 300, 510, 1010, 1100, and 1130; utility coordination process matrix; utility training debrief
+- **Outcome:** Full-cycle question-and-answer test completed with report output saved locally and prepared for index registration
+
+### 2026-03-19 11:15 AM
+
+- **Task Order:** Ingest Environmental Manual as a large manual
+- **Objective:** Register the Environmental Manual, create its first section-map companion, and record the ingestion in the Civil Engineering knowledge workflow
+- **Inputs:** docs/manuals/Environmental Manual.pdf; Agent_SOP.md large-manual rules; Indexing_Schema.md large-manual rules
+- **Expected Outputs:** Source registration, section-map companion file, and knowledge-index updates for Environmental Manual
+- **Governing Standard:** Agent_SOP.md Sections 5.6 and 6; Indexing_Schema.md Large Manual Rule
+- **Action:** Created first-pass large-manual ingestion package for Environmental Manual
+- **Source:** Environmental Manual contents and outline structure
+- **Outcome:** Environmental Manual prepared for retrieval by scoping, classification, environmental review, and permitting topics
+
+### 2026-03-24 10:30 PM
+
+- **Task Order:** Ingest new manuals from report folder for knowledge index
+- **Objective:** Add Hydraulics Manual with its metadata into archive_inventory.db and re-validate the index
+- **Inputs:** docs/manuals/Hydraulics_Manual.pdf; .vscode/register_knowledge_sources.py; .vscode/init_archive_inventory.py; agent_journal.md; Agent_SOP.md Section 5.7
+- **Governing Standard:** Agent_SOP.md Sections 4, 5, 6; Writing-Styles.md; Agent persona no fabrication / evidence-only
+- **Action:** Executed init and registration scripts; added Hydraulics Manual entry; validated database
+- **Source:** archive_inventory.db schema and registration script; WSDOT manuals in docs/manuals/; Source_of_Truth_Map.md
+- **Outcome:** Hydraulics Manual registered in sources table as path docs/manuals/Hydraulics_Manual.pdf; validation PASS; Index now includes four manuals and two debrief references.
